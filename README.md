@@ -1,23 +1,32 @@
-# Gigapan Downloader
+# Gigapan Downloader 2
 
-Python scipt for downloading gigapan pictures
+> New: Much faster download due to using the same session across multiple downloads parallelizing the downloads.
+
+Python **3** script for downloading gigapan pictures
 
 This script should be used to only download gigapan tiles that you have copyright permissions to use.  Doing otherwise is a violation of the [Terms of Service of Gigapan, Inc.](http://www.gigapan.com/cms/about/terms) and is expressly prohibited.
 
-This Python 2.X script downloads gigapan pictures at their highest resolution.
+This Python **3.X** script downloads gigapan pictures at their highest resolution.
+
+## Install
+
+```
+git clone https://github.com/flekschas/gigapan-downloader
+cd gigapan-downloader
+# We recommend setting up a viirtual environment first. E.g.:
+# mkvirtualenv -a $(pwd) gigapan-downloader
+pip install -r ./requirements.txt
+```
+
 
 ## How to run?
 ```
-python downloadGigaPan.py <imageid>
+python downloadGigaPan.py <image-id> <start-height> <start-width>
 ```
 
 For example:
 
-```
-http://www.gigapan.com/gigapans/54825
-```
-
-The `<imageid>` is 54825
+To download http://www.gigapan.com/gigapans/54825 use the `<image-id>` 54825 and call the script as follows:
 
 ```
 python downloadGigaPan.py 54825
@@ -51,5 +60,3 @@ IEEE Transactions on Visualization and Computer Graphics, 17(12), 2011, pp 1737 
 ```
 
 https://youtu.be/FwSMjYHTNX8
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FwSMjYHTNX8" frameborder="0" allowfullscreen></iframe>
