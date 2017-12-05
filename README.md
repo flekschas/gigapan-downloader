@@ -13,6 +13,7 @@ This Python **3.X** script downloads gigapan pictures at their highest resolutio
 ```
 git clone https://github.com/flekschas/gigapan-downloader
 cd gigapan-downloader
+
 # We recommend setting up a viirtual environment first. E.g.:
 # mkvirtualenv -a $(pwd) gigapan-downloader
 pip install -r ./requirements.txt
@@ -21,10 +22,12 @@ pip install -r ./requirements.txt
 
 ## How to run?
 ```
-python downloadGigaPan.py <image-id> <start-height> <start-width>
+python downloadGigaPan.py <image-id> <start-height=0> <start-width=0>
 ```
 
-For example:
+Note: `start-height` and `start-width` are optional and fall back to zero if not provided.
+
+**For example**:
 
 To download http://www.gigapan.com/gigapans/54825 use the `<image-id>` 54825 and call the script as follows:
 
