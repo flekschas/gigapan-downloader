@@ -54,8 +54,8 @@ def d(i, j, z, s):
         except requests.exceptions.ConnectionError as e:
             # Needs improvement
             print(
-                'Failed to download zoom:{} width:{}  height:{}. Retry!'
-                .format(z, i, j)
+                'Failed to download zoom={} height={} width={}. Retry!'
+                .format(z, j, i)
             )
             sys.stdout.flush()
             with requests.Session() as s:
@@ -68,7 +68,7 @@ def d(i, j, z, s):
 
             downloaded = True
 
-    print(url, filename, 'downloaded' if downloaded else 'skipped')
+    # print(url, filename, 'downloaded' if downloaded else 'skipped')
     sys.stdout.flush()
 
 
@@ -121,7 +121,7 @@ for z in range(start_zoom, max_zoom + 1):
     div = 2 ** (max_zoom - z)
     wt = int(math.ceil((width / div) / tile_size))
     ht = int(math.ceil((height / div) / tile_size))
-    print(z, wt, ht)
+    print(z, ht, wt)
     for j in range(start_height, ht):
         with requests.Session() as s:
             try:
@@ -139,3 +139,4 @@ for z in range(start_zoom, max_zoom + 1):
                 pass
         with open('last.txt', 'w') as f:
             f.write('zoom: {}; height: {}'.format(z, j))
+    print('DONE!')
