@@ -29,15 +29,35 @@ for snap in snap1:
 for snap in snap2:
     total_views_snap2 += snap['snapshot']['views']
 
-for snap in snap1:
+snap1_id_to_snap = {}
+snap2_id_to_snap = {}
+
+for ind, snap in enumerate(snap1):
+    snap1_id_to_snap[snap['snapshot']['id']] = snap['snapshot']
     snap['snapshot']['views_original'] = snap['snapshot']['views']
     snap['snapshot']['views'] /= total_views_snap1
 
 for snap in snap2:
+    snap2_id_to_snap[snap['snapshot']['id']] = snap['snapshot']
     snap['snapshot']['views_original'] = snap['snapshot']['views']
     snap['snapshot']['views'] /= total_views_snap2
 
 new_snap = snap1 + snap2
+
+# Search for duplictaes
+delete = []
+for ind, snap in enumerate(new_snap):
+    if 'duplicate' in snap['snapshot']:
+        src = snap1_id_to_snap[snap['snapshot']['src_id']]
+        src['views'] = (
+            (src['views_original'] + snap['snapshot']['views_original']) /
+            (total_views_snap1 + total_views_snap2)
+        )
+        delete.append(ind)
+
+for ind in delete:
+    del new_snap[ind]
+
 
 with open('combined.json', 'w') as f:
     json.dump(new_snap, f)
